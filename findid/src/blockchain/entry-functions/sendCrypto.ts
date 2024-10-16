@@ -11,6 +11,7 @@ export const excecuteSendCryptoTransaction = async (key, pin, transactionData) =
         if (account.publicKey.toString() !== key.publicKey) {
             throw new Error('Account Mismatch: Wrong pin or Identity to derive the account');
         }
+        console.log(account.accountAddress.toString())
         const transaction = await aptos.transaction.build.simple({
             sender: account.accountAddress,
             data: {
@@ -24,6 +25,7 @@ export const excecuteSendCryptoTransaction = async (key, pin, transactionData) =
             signerPublicKey: account.publicKey,
             transaction
         });
+        console.log(userTransactionResponseSimulate)
         const signedTransaction = aptos.transaction.sign({
             signer: account,
             transaction

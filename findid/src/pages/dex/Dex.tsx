@@ -267,6 +267,7 @@ function Dex() {
     const handleAddLiquidity = async () => {
         try {
             let rawCoinData = await getAccountRawCoinsData(currentAccount.address);
+            console.log(rawCoinData, chekingToken)
             const coin = rawCoinData.find(coin => coin.metadata.symbol === chekingToken.name);
             let coinType = coin.asset_type;
             const transactionData = {

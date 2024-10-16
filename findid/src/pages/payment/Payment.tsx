@@ -113,8 +113,10 @@ function Payment() {
         setError('');
     };
 
-    const handleCryptoChange = cryptoSymbol => {
-        const selected = cryptoBalance.find(crypto => crypto.symbol === cryptoSymbol);
+    const handleCryptoChange = async cryptoSymbol => {
+        const allCoin = await getAccountCoinsData(selectedAccount.address);
+        setCryptoBalance(allCoin);
+        const selected = allCoin.find(crypto => crypto.symbol === cryptoSymbol);
         setSelectedCrypto(selected);
         setAmount('');
         setError('');
@@ -163,11 +165,10 @@ function Payment() {
         try {
             setRetrieveCardStarted(true);
             const transactionData = {
-                amount: parseFloat(amount) * Math.pow(10, selectedCrypto.decimal),
+                amount: Math.round(parseFloat(amount) * Math.pow(10, selectedCrypto.decimal)),
                 to: selectedContact.account,
                 typeArguments: selectedCrypto.asset_type
             };
-
             const res = await excecuteSendCryptoTransaction(selectedAccount, pin, transactionData);
             if (!res.success) {
                 throw new Error('Unknown Error');
@@ -176,7 +177,7 @@ function Payment() {
                 let data = {
                     sender: selectedAccount.address,
                     receiver: selectedContact.account,
-                    amount: parseFloat(amount),
+                    amount: (parseFloat(amount)),
                     token: selectedCrypto.symbol,
                     notes: notes,
                     timestamp: new Date(Date.now()).toLocaleString(),
@@ -374,7 +375,10 @@ function Payment() {
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            {!cryptoBalance.length ? (<>
+                                                <h5 className='text-center mt-5'> You dont have any coins to make paymnet </h5>
+                                            </>) : (<>
+                                            
                                             <div className='modal-body'>
                                                 <Card
                                                     className='p-4'
@@ -492,6 +496,7 @@ function Payment() {
                                                     </Card.Body>
                                                 </Card>
                                             </div>
+                                            </>)}
                                         </div>
                                     ) : (
                                         <div

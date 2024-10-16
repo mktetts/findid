@@ -71,7 +71,7 @@ module dex_contract::dex_testing {
         debug::print(&string::utf8(b"before swapping user 3 balance"));
         debug::print(&dex::check_balance<AptosCoin>(user3_addr));
 
-        // dex::swap<AptosCoin, USDT>(user3, 2000000, TEST_VAAS);
+        dex::swap<AptosCoin, USDT>(user3, 2000000, TEST_VAAS);
 
         debug::print(&string::utf8(b"after swapping user 3 balance"));
         debug::print(&dex::check_balance<AptosCoin>(user3_addr));
@@ -79,11 +79,14 @@ module dex_contract::dex_testing {
         debug::print(&string::utf8(b"After swapping user 1 balance"));
         debug::print(&dex::check_balance<AptosCoin>(user1_addr));
 
-        debug::print(&dex::get_dex_signer_address());
-        dex::withdraw_staks<USDT>(user1, 3000000);
+        debug::print(&string::utf8(b"After swapping user 3 USDT balance"));
+        debug::print(&dex::check_balance<USDT>(user3_addr));
+
+        // debug::print(&dex::get_dex_signer_address());
+        // dex::withdraw_staks<USDT>(user1, 3000000);
         // dex::withdraw_rewards<AptosCoin>(user1, 12705723);
         // fungible_asset::transfer(user1, user1_address, fa);
-        debug::print(&dex::get_stake_pool());
+        // debug::print(&dex::get_stake_pool());
         // dex::init_module_for_test(token_admin);
         // debug::print(&dex::check_balance(signer::address_of(token_admin)));
 

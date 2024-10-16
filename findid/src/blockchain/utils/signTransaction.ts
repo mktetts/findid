@@ -53,8 +53,10 @@ export const excecuteAddLiquidityTransaction = async (key, pin, transactionData)
             signerPublicKey: account.publicKey,
             transaction
         });
+        console.log(userTransactionResponseSimulate)
+
         if (!userTransactionResponseSimulate.success) {
-            throw new Error('Error');
+            throw new Error(userTransactionResponseSimulate.vm_status);
         }
         const committedTransaction = await aptosClient().transaction.submit.simple({
             transaction,
@@ -92,7 +94,7 @@ export const excecuteSwapTransaction = async (key, pin, transactionData) => {
             transaction
         });
         if (!userTransactionResponseSimulate.success) {
-            throw new Error('Error');
+            throw new Error(userTransactionResponseSimulate.vm_status);
         }
         const committedTransaction = await aptosClient().transaction.submit.simple({
             transaction,
@@ -130,7 +132,7 @@ export const excecuteWithdrawLiquidityTransaction = async (key, pin, transaction
             transaction
         });
         if (!userTransactionResponseSimulate.success) {
-            throw new Error('Error');
+            throw new Error(userTransactionResponseSimulate.vm_status);
         }
         const committedTransaction = await aptosClient().transaction.submit.simple({
             transaction,
@@ -167,7 +169,7 @@ export const excecuteWithdrawRewardTransaction = async (key, pin, transactionDat
             transaction
         });
         if (!userTransactionResponseSimulate.success) {
-            throw new Error('Error');
+            throw new Error(userTransactionResponseSimulate.vm_status);
         }
         const committedTransaction = await aptosClient().transaction.submit.simple({
             transaction,
@@ -204,7 +206,7 @@ export const excecuteAssRewardAsLiquidityTransaction = async (key, pin, transact
             transaction
         });
         if (!userTransactionResponseSimulate.success) {
-            throw new Error('Error');
+            throw new Error(userTransactionResponseSimulate.vm_status);
         }
         const committedTransaction = await aptosClient().transaction.submit.simple({
             transaction,
