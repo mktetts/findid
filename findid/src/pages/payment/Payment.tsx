@@ -45,10 +45,15 @@ function Payment() {
     }, []);
 
     const init = async () => {
+        
+        const cards = await FinDIDSDK.getCryptoCards(await getWeb5(), connectedDid);
+        if (!cards.length) {
+            setLoading(false);
+            return;
+        }
+        setAllCards(cards);
         const contacts = await FinDIDSDK.getContacts(await getWeb5(), connectedDid);
         setAllContacts(contacts);
-        const cards = await FinDIDSDK.getCryptoCards(await getWeb5(), connectedDid);
-        setAllCards(cards);
         const allCoins = await getAccountCoinsData(cards[0].address);
         setCryptoBalance(allCoins);
         setSelectedCrypto(allCoins[0]);
@@ -196,6 +201,11 @@ function Payment() {
 
     if (loading) {
         return <Loader />;
+    }
+    if(!allCards.length){
+        return <div>
+            <h3>Please create Atleast one account to make payments</h3>
+        </div>
     }
     return (
         <div>
