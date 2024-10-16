@@ -105,6 +105,7 @@ function Dashboard({ identity }) {
         setReceivedPaymentDetils(details.receivedPaymentDetails);
         const contacts = await FinDIDSDK.getContacts(await getWeb5(), connectedDid);
         setAllContacts(contacts);
+        setLoading(false);
     };
     const handleSCopy = text => {
         navigator.clipboard
