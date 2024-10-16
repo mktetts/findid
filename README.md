@@ -85,7 +85,7 @@ Notes:
 ## Deployed Contract Address:
 
 - Identity Contract: [0xdca600934d313904e15ce1071aded632d26713e9e0c297d53153eca066b55fbd](https://explorer.aptoslabs.com/object/0xdca600934d313904e15ce1071aded632d26713e9e0c297d53153eca066b55fbd?network=testnet)
-- ApDex Contract: [0xb7410dd91242542352ecc63804a32cfd4abe4864173a1b6972224f9ec9a8536b](https://explorer.aptoslabs.com/object/0xb7410dd91242542352ecc63804a32cfd4abe4864173a1b6972224f9ec9a8536b?network=testnet)
+- ApDex Contract: [0x46db8c25a832ad548f21179e4a6dc317821fae6d3090e21e63036ae32d523f85](https://explorer.aptoslabs.com/object/0x46db8c25a832ad548f21179e4a6dc317821fae6d3090e21e63036ae32d523f85?network=testnet)
 
 In the Video, I used old contract => 0x72cebb896b282f725e6695184d82ba7a95cc29c24707055b3f14962e448d3f42
 
