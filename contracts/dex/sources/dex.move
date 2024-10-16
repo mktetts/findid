@@ -192,7 +192,7 @@ module dex_contract::dex {
     ) acquires StakePool, RewardPool, UserStakeController
     {
         let swapper_addr = signer::address_of(swapper);
-        // update_price_fee(swapper, pyth_update_data);
+        update_price_fee(swapper, pyth_update_data);
 
         let gstake_pool = borrow_global_mut<StakePool>(@dex_contract);
         let greward_pool = borrow_global_mut<RewardPool>(@dex_contract);
@@ -201,11 +201,11 @@ module dex_contract::dex {
         let from_coin_reward_pool = simple_map::borrow_mut(&mut greward_pool.reward_pool, &coin_symbol_from);
         let to_coin_stake_pool = simple_map::borrow_mut(&mut gstake_pool.stake_pool, &coin_symbol_to);
 
-        let from_coin_price = price::new(i64::new(900525000, false), 674, i64::new(8, false), 1663680700);
-        let to_coin_price = price::new(i64::new(99977511, false), 674, i64::new(8, true), 1663680700);
+        // let from_coin_price = price::new(i64::new(900525000, false), 674, i64::new(8, false), 1663680700);
+        // let to_coin_price = price::new(i64::new(99977511, false), 674, i64::new(8, true), 1663680700);
 
-        // let from_coin_price = get_coin_price(to_coin_stake_pool.price_feed_identifier);
-        // let to_coin_price = get_coin_price(to_coin_stake_pool.price_feed_identifier);
+        let from_coin_price = get_coin_price(to_coin_stake_pool.price_feed_identifier);
+        let to_coin_price = get_coin_price(to_coin_stake_pool.price_feed_identifier);
 
         let from_coin_price_magnitude = i64::get_magnitude_if_positive(&price::get_price(&from_coin_price));
         let to_coin_price_magnitude = i64::get_magnitude_if_positive(&price::get_price(&to_coin_price));
