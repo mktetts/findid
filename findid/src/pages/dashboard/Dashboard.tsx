@@ -81,10 +81,9 @@ function Dashboard({ identity }) {
             const cards = await FinDIDSDK.getCryptoCards(await getWeb5(), connectedDid);
             setAllCards(cards);
             setCurrentAccount(cards[0]);
-            if(cards.length === 0){
-                current_account = null
-            }
-            else{
+            if (cards.length === 0) {
+                current_account = null;
+            } else {
                 current_account = cards[0];
                 sessionStorage.setItem('allCards', JSON.stringify(cards));
             }
@@ -94,9 +93,9 @@ function Dashboard({ identity }) {
             setCurrentAccount(cards[0]);
             current_account = cards[0];
         }
-        if(current_account === null){
+        if (current_account === null) {
             setLoading(false);
-            return
+            return;
         }
         const transactions = await getAccountTransactions(current_account.address);
 
@@ -106,7 +105,6 @@ function Dashboard({ identity }) {
         setReceivedPaymentDetils(details.receivedPaymentDetails);
         const contacts = await FinDIDSDK.getContacts(await getWeb5(), connectedDid);
         setAllContacts(contacts);
-        
     };
     const handleSCopy = text => {
         navigator.clipboard
@@ -115,8 +113,7 @@ function Dashboard({ identity }) {
                 setIsCopied(true); // Set the copied state to true when copied
                 setTimeout(() => setIsCopied(false), 2000); // Reset back to copy icon after 2 seconds
             })
-            .catch(err => {
-            });
+            .catch(err => {});
     };
     const formatString = (str: string) => {
         if (str.length <= 20) {
@@ -188,19 +185,21 @@ function Dashboard({ identity }) {
         <div>
             <div className='d-flex justify-content-between align-items-center mt-2'>
                 {/* <h3 className='flex-grow-1 text-center'>Welcome back, {identity.username}</h3> */}
-                <DropdownButton
-                    align='end'
-                    title={currentAccount.accountName}
-                    id='dropdown-menu-align-end'
-                    variant='secondary'
-                    className='ms-auto'
-                >
-                    {allCards.map((card, index) => (
-                        <Dropdown.Item key={index} eventKey={index} onClick={() => handleChangeCurrentAccount(card)}>
-                            {card.accountName}
-                        </Dropdown.Item>
-                    ))}
-                </DropdownButton>
+                {allCards.length && (
+                    <DropdownButton
+                        align='end'
+                        title={currentAccount.accountName}
+                        id='dropdown-menu-align-end'
+                        variant='secondary'
+                        className='ms-auto'
+                    >
+                        {allCards.map((card, index) => (
+                            <Dropdown.Item key={index} eventKey={index} onClick={() => handleChangeCurrentAccount(card)}>
+                                {card.accountName}
+                            </Dropdown.Item>
+                        ))}
+                    </DropdownButton>
+                )}
             </div>
             <div className='container mt-5 mb-5'>
                 <div className='row no-gutters'>
@@ -216,19 +215,30 @@ function Dashboard({ identity }) {
                                 </div>
                                 <p className='mt-3'>Email: {identity.email} </p>
                             </div>
-                            <div className='p-3 bg-black text-white d-flex'>
-                                <h6>Account : {formatString(currentAccount.address)}</h6>
+                            {allCards.length ? (
+                                <>
+                                    <div className='p-3 bg-black text-white d-flex'>
+                                        <h6>Account : {formatString(currentAccount.address)}</h6>
 
-                                {isCopied ? (
-                                    <FiCheck className='ms-2 text-success' /> // Checkmark icon when copied
-                                ) : (
-                                    <FiCopy
-                                        className='ms-2'
-                                        style={{ cursor: 'pointer' }}
-                                        onClick={() => handleSCopy(currentAccount.address)}
-                                    /> // Copy icon before it's copied
-                                )}
-                            </div>
+                                        {isCopied ? (
+                                            <FiCheck className='ms-2 text-success' /> // Checkmark icon when copied
+                                        ) : (
+                                            <FiCopy
+                                                className='ms-2'
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={() => handleSCopy(currentAccount.address)}
+                                            /> // Copy icon before it's copied
+                                        )}
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                <div className='p-3 bg-black text-white d-flex'>
+                                        <h6>Please create atleast one account</h6>
+
+                                        
+                                    </div></>
+                            )}
                             <div className='d-flex flex-row text-white'>
                                 <div className='p-4 bg-secondary text-center skill-block'>
                                     <h4>{allContacts.length}</h4>
@@ -320,15 +330,15 @@ function Dashboard({ identity }) {
                         striped
                         highlightOnHover
                         conditionalRowStyles={[
-                          {
-                              when: () => true, // Apply to all rows
-                              style: {
-                                  height: '60px', // Ensure the height matches the CSS class
-                                  display: 'flex',
-                                  alignItems: 'center'
-                              }
-                          }
-                      ]}
+                            {
+                                when: () => true, // Apply to all rows
+                                style: {
+                                    height: '60px', // Ensure the height matches the CSS class
+                                    display: 'flex',
+                                    alignItems: 'center'
+                                }
+                            }
+                        ]}
                         persistTableHead
                     />
                 </Tab>
@@ -354,15 +364,15 @@ function Dashboard({ identity }) {
                         striped
                         highlightOnHover
                         conditionalRowStyles={[
-                          {
-                              when: () => true, // Apply to all rows
-                              style: {
-                                  height: '60px', // Ensure the height matches the CSS class
-                                  display: 'flex',
-                                  alignItems: 'center'
-                              }
-                          }
-                      ]}
+                            {
+                                when: () => true, // Apply to all rows
+                                style: {
+                                    height: '60px', // Ensure the height matches the CSS class
+                                    display: 'flex',
+                                    alignItems: 'center'
+                                }
+                            }
+                        ]}
                         persistTableHead
                     />
                 </Tab>
