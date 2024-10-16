@@ -1,0 +1,33 @@
+[package]
+name = "dex"
+version = "1.0.1"
+authors = []
+upgrade_policy = "compatible"
+
+[addresses]
+# dex_contract = "0x17bd2d6fb175e99b750eabc264306358b7ac6637f6d662b80390ecd67d6acf8d"
+dex_contract = "_"
+# test_coins = "_"
+#test_coins_extended = "_"
+pyth = "_"
+deployer = "_"
+wormhole = "_"
+# pyth = "0x7e783b349d3e89cf5931af376ebeadbfab855b3fa239b7ada8f5a92fbea6b387"
+# deployer = "0xb31e712b26fd295357355f6845e77c888298636609e93bc9b05f0f604049f434"
+# wormhole = "0x5bc11445584a763c1fa7ed39081f1b920954da14e04b32440cba863d03e19625"
+
+[dev-addresses]
+dex_contract = "0x123"
+#test_coins = "0x43417434fd869edee76cca2a4d2301e528a1551b1d719b75c350c3c97d15b8b9"
+#test_coins_extended = "0xb4d7b2466d211c1f4629e8340bb1a9e75e7f8fb38cc145c54c5c9f9d5017a318"
+pyth = "0x377f0d7c4aaeea8dd73a7a2c6bc817e59aea569e1f9ae0d2f4a80ea1be93bf01"
+deployer = "0x277fa055b6a73c42c0662d5236c65c864ccbf2d4abd21f174a30c8b786eab84b"
+wormhole = "0xde0036a9600559e295d5f6802ef6f3f802f510366e0c23912b0655d972166017"
+
+
+[dependencies]
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework/", rev = "6f83bc6d02207298b2dee91133d75538789bf582" }
+Pyth = { git = "https://github.com/pyth-network/pyth-crosschain.git", subdir = "target_chains/aptos/contracts", rev = "main" }
+
+TestCoins = { local = "../dependencies/testcoins"}
+

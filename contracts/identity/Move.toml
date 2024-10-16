@@ -1,0 +1,14 @@
+[package]
+name = "identity_registration"
+version = "1.0.0"
+authors = []
+
+[addresses]
+identity_contract = "_"
+
+[dev-addresses]
+identity_contract = "0x12"
+
+[dependencies]
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", rev = "mainnet", subdir = "aptos-move/framework/aptos-framework" }
+AptosTokenObjects = { git = "https://github.com/aptos-labs/aptos-core.git", rev = "mainnet", subdir = "aptos-move/framework/aptos-token-objects" }
