@@ -271,7 +271,7 @@ function Dex() {
             const coin = rawCoinData.find(coin => coin.metadata.symbol === chekingToken.name);
             let coinType = coin.asset_type;
             const transactionData = {
-                amount: parseFloat(liquidityAmount) * Math.pow(10, coin.metadata.decimals),
+                amount:  Math.round(parseFloat(liquidityAmount) * Math.pow(10, coin.metadata.decimals)),
                 typeArguments: [coinType]
             };
             setOpenAddLiquidityModal(true);
@@ -295,7 +295,7 @@ function Dex() {
                 COINS_DECIMALS_AND_IDENTIFIER[toToken.name].price_identifier
             ]);
             const transactionData = {
-                amount: parseFloat(toAmount) * Math.pow(10, COINS_DECIMALS_AND_IDENTIFIER[toToken.name].decimal),
+                amount:  Math.round(parseFloat(toAmount) * Math.pow(10, COINS_DECIMALS_AND_IDENTIFIER[toToken.name].decimal)),
                 price_update_data: priceFeedUpdateData,
                 typeArguments: [
                     COINS_DECIMALS_AND_IDENTIFIER[fromToken.name].asset_type,
@@ -320,7 +320,7 @@ function Dex() {
             const coin = rawCoinData.find(coin => coin.metadata.symbol === chekingToken.name);
             let coinType = coin.asset_type;
             const transactionData = {
-                amount: parseFloat(liquidityAmount) * Math.pow(10, coin.metadata.decimals),
+                amount:  Math.round(parseFloat(liquidityAmount) * Math.pow(10, coin.metadata.decimals)),
                 typeArguments: [coinType]
             };
             setTransactionStarted(true);
@@ -340,7 +340,7 @@ function Dex() {
             const coin = rawCoinData.find(coin => coin.metadata.symbol === chekingToken.name);
             let coinType = coin.asset_type;
             const transactionData = {
-                amount: parseFloat(rewardAmount) * Math.pow(10, coin.metadata.decimals),
+                amount:  Math.round(parseFloat(rewardAmount) * Math.pow(10, coin.metadata.decimals)),
                 typeArguments: [coinType]
             };
             setTransactionStarted(true);
