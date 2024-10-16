@@ -81,13 +81,22 @@ function Dashboard({ identity }) {
             const cards = await FinDIDSDK.getCryptoCards(await getWeb5(), connectedDid);
             setAllCards(cards);
             setCurrentAccount(cards[0]);
-            current_account = cards[0];
-            sessionStorage.setItem('allCards', JSON.stringify(cards));
+            if(cards.length === 0){
+                current_account = null
+            }
+            else{
+                current_account = cards[0];
+                sessionStorage.setItem('allCards', JSON.stringify(cards));
+            }
         } else {
             let cards = JSON.parse(allCards);
             setAllCards(cards);
             setCurrentAccount(cards[0]);
             current_account = cards[0];
+        }
+        if(current_account === null){
+            setLoading(false);
+            return
         }
         const transactions = await getAccountTransactions(current_account.address);
 
@@ -97,7 +106,7 @@ function Dashboard({ identity }) {
         setReceivedPaymentDetils(details.receivedPaymentDetails);
         const contacts = await FinDIDSDK.getContacts(await getWeb5(), connectedDid);
         setAllContacts(contacts);
-        setLoading(false);
+        
     };
     const handleSCopy = text => {
         navigator.clipboard
